@@ -25,7 +25,7 @@ services.factory('Connection', function () {
  */
 services.factory('Config', [function () {
         return {
-            urlServer: 'http://localhost:3306/OeuvresRestFul/webresources/webservices',
+            urlServer: 'http://localhost:8383/OeuvresRestFul/webresources/webservices',
             urlGetOeuvres: '/getOeuvres',
             urlGetOeuvre: '/getOeuvre/',
             urlSupprimerOeuvre: '/supprimerOeuvre/',
