@@ -1,27 +1,23 @@
 'use strict';
-
-var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'controllers', 'services', 'directives']);
+/**
+* Déclaration de la variable app qui sera utilisée après.
+* Injection des modules externes (principalement Angular) et
+* des modules internes (ceux qu'on a développés)
+*/
+var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'controllers', 'services']);
+/**
+* Définition des constantes de configuration et injection des modules
+* externes nécessaires : $routeProvider => routage
+*/
 app.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider
                 .when('/home', {
                     templateUrl: 'partials/home.html'
                 })
-                .when('/connect', {
-                    templateUrl: 'partials/connect.html',
+                .when('/login', {
+                    templateUrl: 'partials/login.html',
                     controller: 'ConnectionCtrl as connectionCtrl'
-                })
-                .when('/getOeuvres', {
-                    templateUrl: 'partials/oeuvres.html',
-                    controller: 'OeuvresCtrl as OeuvresCtrl'
-                })
-                .when('/updateOeuvre/:id', {
-                    templateUrl: 'partials/oeuvre.html',
-                    controller: 'OeuvreCtrl as OeuvreCtrl'
-                })
-                .when('/addOeuvre', {
-                    templateUrl: 'partials/oeuvre.html',
-                    controller: 'OeuvreCtrl as OeuvreCtrl'
                 })
                 .otherwise({
                     redirectTo: '/home'
