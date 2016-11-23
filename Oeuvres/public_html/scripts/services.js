@@ -50,4 +50,23 @@ services.factory('Config', [function () {
             urlAddEmployee: '/addEmployee',
             urlDeleteEmployee: '/deleteEmployee/'
         };
-    }]);
+}]);
+
+/**
+* Gestion de l'accès aux données, utilise le
+* service Config qui contient les urls du serveur RestFul.
+* Chaque méthode exposée retourne une promise qui
+* sera exploitée dans les contrôleurs
+*/
+services.factory('OeuvresRest', ['$http', 'Config',
+function ($http, Config) {
+    // Liste des méthodes exposées
+    var oeuvresRest = {
+        getConnecter: getConnecter
+    };
+    return oeuvresRest;
+    
+    function getConnecter(login, pwd) {
+        return $http.get(Config.urlServer + Config.urlGetConnecter + login + '-' + pwd);
+    }
+}]);

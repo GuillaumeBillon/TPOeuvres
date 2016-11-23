@@ -30,8 +30,8 @@ controllers.controller('MainCtrl', ['$rootScope', '$location', function
 * permet de s'authentifier et d'accéder aux
 * fonctionnalités
 */
-controllers.controller('ConnectionCtrl', ['$rootScope', 'Connection',
-'$location', '$filter', function ($rootScope, Connection, $location, $filter) {
+controllers.controller('ConnectionCtrl', ['$rootScope', 'OeuvresRest',
+'$location', '$filter', function ($rootScope, OeuvresRest, $location, $filter) {
     var connectionCtrl = this;
     // On référence les méthodes exposées
     connectionCtrl.signIn = signIn;
@@ -46,10 +46,17 @@ controllers.controller('ConnectionCtrl', ['$rootScope', 'Connection',
     */
     function signIn(login, pwd) {
         connectionCtrl.error = "";
-        $rootScope.isConnected = Connection.getConnection(login, pwd);
-        if ($rootScope.isConnected)
-            $location.path('/home');
-        else
+        var estConnecter = OeuvresRest.getConnecter(login, pwd);
+        estConnecter.success(function (data) {
+            if(data.length > 0){
+                $rootScope.isConnected = estConnecter;
+                $location.path('/home');
+            }
+            else {
+                connectionCtrl.error = 'Login ou mot de passe erronné !';
+            }
+        }).error(function (data){
             connectionCtrl.error = 'Login ou mot de passe erronné !';
+        });
     }
 }]);
