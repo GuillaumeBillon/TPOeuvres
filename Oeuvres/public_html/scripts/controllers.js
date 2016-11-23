@@ -46,10 +46,11 @@ controllers.controller('ConnectionCtrl', ['$rootScope', 'Connection',
     */
     function signIn(login, pwd) {
         connectionCtrl.error = "";
+        alert(login);
         $rootScope.isConnected = Connection.getConnection(login, pwd);
         if ($rootScope.isConnected)
             $location.path('/home');
         else
-        connectionCtrl.error = $filter('translate')('signInError');
+        connectionCtrl.error = 'Login ou mot de passe erronné !';
     }
 }]);

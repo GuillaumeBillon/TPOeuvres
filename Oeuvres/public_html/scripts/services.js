@@ -13,6 +13,7 @@ services.factory('Connection', function () {
     // Vérifie les valeurs fournies
     // et retourne true ou false
     function getConnection(login, mdp) {
+        
         var OK = false;
         if ((login === "admin") && (mdp === "mdp"))
             OK = true;
