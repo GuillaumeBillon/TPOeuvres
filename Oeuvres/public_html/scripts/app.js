@@ -1,7 +1,30 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+'use strict';
 
+var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'controllers', 'services', 'directives']);
+app.config(['$routeProvider',
+    function ($routeProvider) {
+        $routeProvider
+                .when('/home', {
+                    templateUrl: 'partials/home.html'
+                })
+                .when('/connect', {
+                    templateUrl: 'partials/connect.html',
+                    controller: 'ConnectionCtrl as connectionCtrl'
+                })
+                .when('/getOeuvres', {
+                    templateUrl: 'partials/oeuvres.html',
+                    controller: 'OeuvresCtrl as OeuvresCtrl'
+                })
+                .when('/updateOeuvre/:id', {
+                    templateUrl: 'partials/oeuvre.html',
+                    controller: 'OeuvreCtrl as OeuvreCtrl'
+                })
+                .when('/addOeuvre', {
+                    templateUrl: 'partials/oeuvre.html',
+                    controller: 'OeuvreCtrl as OeuvreCtrl'
+                })
+                .otherwise({
+                    redirectTo: '/home'
+                });
+    }]);
 
