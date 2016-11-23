@@ -36,7 +36,7 @@ controllers.controller('ConnectionCtrl', ['$rootScope', 'Connection',
     // On référence les méthodes exposées
     connectionCtrl.signIn = signIn;
     connectionCtrl.login = "";
-    connectionCtrl.mdp = "";
+    connectionCtrl.pwd = "";
     /**
     * Appelle le service Connection avec le login
     * et le pwd. Si Ok redirige vers la page d'accueil
@@ -46,11 +46,10 @@ controllers.controller('ConnectionCtrl', ['$rootScope', 'Connection',
     */
     function signIn(login, pwd) {
         connectionCtrl.error = "";
-        alert(login);
         $rootScope.isConnected = Connection.getConnection(login, pwd);
         if ($rootScope.isConnected)
             $location.path('/home');
         else
-        connectionCtrl.error = 'Login ou mot de passe erronné !';
+            connectionCtrl.error = 'Login ou mot de passe erronné !';
     }
 }]);
