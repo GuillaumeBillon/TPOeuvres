@@ -2,8 +2,8 @@
 <!-- >DEBIAN-EPUL.UNIV-LYON1.FR/EmployeesSrv/employee.php</!-->
 <html  ng-app="app">
     <head>
-        <title>Gestion des oeuvres</title>
-        <meta charset="UTF-8">
+        <title>Gestion des oeuvres</title>	
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="favicon.ico" />
         <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet"> 
@@ -39,11 +39,11 @@
                             <li class="dropdown" ng-if="isConnected">
                                 <a class="dropdown-toggle" data-toggle="dropdown">Oeuvres<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#/getEmployees">Lister</a></li>
+                                    <li><a href="#/getOeuvres">Lister</a></li>
                                     <li><a href="#/addEmployee">Ajouter</a></li>
                                 </ul>
                             </li>     
-                            <li class="active"  ng-if="isConnected"><a href="#/home">Réservations</a></li>
+                            <li ng-if="isConnected"><a href="#/home">Réservations</a></li>
                         </ul>  
                         <ul class="nav navbar-nav navbar-right">            
                             <li ng-show="!isConnected"><a href="#/login">Se connecter</a></li>

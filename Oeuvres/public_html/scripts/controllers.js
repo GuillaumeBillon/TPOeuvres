@@ -61,3 +61,18 @@ controllers.controller('ConnectionCtrl', ['$rootScope', 'OeuvresRest',
         });
     }
 }]);
+
+/**
+* Pilote le listing des oeuvres
+*/
+controllers.controller('OeuvresCtrl', ['OeuvresRest', '$location', '$route', function(OeuvresRest, $location, $route) {
+    var oeuvresCtrl = this;
+    // Récupération de la promesse
+    var oeuvresPromise = OeuvresRest.getOeuvres();
+    oeuvresPromise.success(function (data) {
+        if (data.length > 0) 
+            oeuvresCtrl.oeuvres = data;
+    }).error(function (data) {
+        oeuvresCtrl.error = data; 
+    });
+}]);
