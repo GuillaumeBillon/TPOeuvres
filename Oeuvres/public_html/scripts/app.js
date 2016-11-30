@@ -19,9 +19,13 @@ app.config(['$routeProvider',
                     templateUrl: 'partials/login.html',
                     controller: 'ConnectionCtrl as connectionCtrl'
                 })
-                .when('/getOeuvres', {
+				.when('/getOeuvres', {
                     templateUrl: 'partials/catalogue.html',
                     controller: 'OeuvresCtrl as oeuvresCtrl'
+                })
+                .when('/listereservations', {
+                    templateUrl: 'partials/listereservations.html',
+                    controller: 'ReservationsCtrl as reservationsCtrl'
                 })
                 .otherwise({
                     redirectTo: '/home'

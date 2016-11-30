@@ -63,14 +63,18 @@ function ($http, Config) {
     // Liste des méthodes exposées
     var oeuvresRest = {
         getConnecter: getConnecter,
-        getOeuvres : getOeuvres
+        getOeuvres : getOeuvres,
+        getReservations: getReservations
     };
     return oeuvresRest;
     
     function getConnecter(login, pwd) {
         return $http.get(Config.urlServer + Config.urlGetConnecter + login);
     }
-    function getOeuvres() {
+    function getReservations() {
+        return $http.get(Config.urlServer + Config.urlGetReservations);
+    }
+	function getOeuvres() {
         return $http.get(Config.urlServer + Config.urlGetOeuvres);
     }
 }]);

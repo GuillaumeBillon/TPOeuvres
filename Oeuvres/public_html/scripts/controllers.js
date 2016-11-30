@@ -25,6 +25,24 @@ controllers.controller('MainCtrl', ['$rootScope', '$location', function
     }
 }]);
 
+controllers.controller('ReservationsCtrl', ['OeuvresRest', '$location', function
+(OeuvresRest,  $location) {
+    var reservationCtrl = this;
+    // On référence les méthodes exposées
+    var reservations = OeuvresRest.getReservations();
+    /**
+    * Déconnexion : isConnected passe à faux => le menu disparaîtra
+    * On recharge la page principale
+    */
+    reservations.success(function (data) {
+            if (data.length > 0) // si la liste n'est pas vide
+                reservationsCtrl.reservations = data;
+        }).error(function (data) { // Si la requête a provoqué une erreur (ex. 404)
+            reservationsCtrl.error = data; // On affiche l'erreur brute,
+            alert(reservationsCtrl.error);
+        });
+}]);
+
 /**
 * Contrôleur de la page connect.html qui
 * permet de s'authentifier et d'accéder aux
