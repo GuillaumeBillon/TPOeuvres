@@ -62,11 +62,15 @@ services.factory('OeuvresRest', ['$http', 'Config',
 function ($http, Config) {
     // Liste des méthodes exposées
     var oeuvresRest = {
-        getConnecter: getConnecter
+        getConnecter: getConnecter,
+        getOeuvres : getOeuvres
     };
     return oeuvresRest;
     
     function getConnecter(login, pwd) {
         return $http.get(Config.urlServer + Config.urlGetConnecter + login);
+    }
+    function getOeuvres() {
+        return $http.get(Config.urlServer + Config.urlGetOeuvres);
     }
 }]);
