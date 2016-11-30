@@ -48,7 +48,8 @@ controllers.controller('ConnectionCtrl', ['$rootScope', 'OeuvresRest',
         connectionCtrl.error = "";
         var estConnecter = OeuvresRest.getConnecter(login, pwd);
         estConnecter.success(function (data) {
-            if(data.length > 0){
+            var resultat = angular.fromJson(data);
+            if(resultat !== null){
                 $rootScope.isConnected = estConnecter;
                 $location.path('/home');
             }
