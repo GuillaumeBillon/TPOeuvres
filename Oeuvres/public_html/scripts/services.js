@@ -25,7 +25,7 @@ services.factory('Connection', function () {
  */
 services.factory('Config', [function () {
         return {
-            urlServer: 'http://localhost:8383/OeuvresRestFul/webresources/webservices',
+            urlServer: 'http://localhost:8080/OeuvresRestFul/webresources/webservices',
             urlGetOeuvres: '/getOeuvres',
             urlGetOeuvre: '/getOeuvre/',
             urlSupprimerOeuvre: '/supprimerOeuvre/',
@@ -67,6 +67,6 @@ function ($http, Config) {
     return oeuvresRest;
     
     function getConnecter(login, pwd) {
-        return $http.get(Config.urlServer + Config.urlGetConnecter + login + '-' + pwd);
+        return $http.get(Config.urlServer + Config.urlGetConnecter + login);
     }
 }]);
