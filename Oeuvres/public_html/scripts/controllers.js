@@ -27,7 +27,7 @@ controllers.controller('MainCtrl', ['$rootScope', '$location', function
 
 controllers.controller('ReservationsCtrl', ['OeuvresRest', '$location', function
 (OeuvresRest,  $location) {
-    var reservationCtrl = this;
+    var reservationsCtrl = this;
     // On référence les méthodes exposées
     var reservations = OeuvresRest.getReservations();
     /**
