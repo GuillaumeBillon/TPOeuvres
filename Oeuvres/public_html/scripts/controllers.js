@@ -35,8 +35,9 @@ controllers.controller('ReservationsCtrl', ['OeuvresRest', '$location', function
     * On recharge la page principale
     */
     reservations.success(function (data) {
-            if (data.length > 0) // si la liste n'est pas vide
+            if (data.length > 0) {
                 reservationsCtrl.reservations = data;
+            }
         }).error(function (data) { // Si la requête a provoqué une erreur (ex. 404)
             reservationsCtrl.error = data; // On affiche l'erreur brute,
             alert(reservationsCtrl.error);

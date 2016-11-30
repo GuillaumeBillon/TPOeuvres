@@ -14,13 +14,14 @@
         </thead>
         <tbody>
             <tr ng-repeat="reservation in reservationsCtrl.reservations">
-                    <td>${reservation.oeuvre.titre}</td>
-                    <td><fmt:formatDate value="${reservation.reservationPK.dateReservation}" type="date" pattern="yyyy-MM-dd"/></td>
-                    <td>${reservation.statut}</td>
-                    <td>${reservation.adherent.prenomAdherent}</td>
-                    <td>${reservation.adherent.nomAdherent}</td>
-                    <td><a class="btn btn-primary" href="#/confirmer"/>'">Confirmer</a></td>
-                    <td><a class="btn btn-primary" href="#/supprimer"/>'">Supprimer</a></td>                    
+                    <td>{{reservation.oeuvre.titre}}</td>
+                    <!-- <td>{{reservation.date_reservation}}"</td> -->
+                    <td>{{reservation.date_reservation}}</td>
+                    <td>{{reservation.statut}}</td>
+                    <td>{{reservation.adherent.prenom_adherent}}</td>
+                    <td>{{reservation.adherent.nom_adherent}}</td>
+                    <td><a class="btn btn-primary" href="#/confirmer">Confirmer</a></td>
+                    <td><a class="btn btn-primary" href="#/supprimer">Supprimer</a></td>                    
                 </tr>                   
         </tbody>
     </table>              
