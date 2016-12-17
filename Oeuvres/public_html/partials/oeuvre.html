@@ -10,20 +10,22 @@
         <div class="form-group">
             <label class="col-md-3 control-label">Prix : </label>
             <div class="col-md-3">
-                <input type="text" name="txtPrix" ng-model="oeuvreCtrl.oeuvre.prix"  class="form-control" placeholder="Prix de l'oeuvre" required>
+                <input type="text" name="txtPrix" ng-model="oeuvreCtrl.oeuvre.prix"  class="form-control" placeholder="Prix de l'oeuvre" required autofocus> 
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-3 control-label">Proprietaire : </label>
             <div class="col-sm-6 col-md-3">
-                <select class='form-control' name='lProprietaires' required ng-options='option.id as (option.prenom_proprietaire + " " + option.nom_proprietaire) for option in oeuvreCtrl.proprietaires track by option.id_proprietaire' ng-model="oeuvreCtrl.selectedOptionPro">
+                <select class='form-control' name='lProprietaires' required 
+                        ng-options="option.nom_proprietaire for option in oeuvreCtrl.proprietaires track by option.id_proprietaire"
+                        ng-model="oeuvreCtrl.selectedOptionProprietaire">
                         <option value=''>Sélectionner une valeur</option>
                 </select>
             </div>
         </div>             
         <div class="form-group">
             <div class="col-md-4 col-md-offset-4">
-                <button type="submit" class="btn btn-default btn-primary" ng-click="oeuvreCtrl.validateOeuvre(oeuvreCtrl.oeuvre.id_oeuvre, oeuvreForm)"><span class="glyphicon glyphicon-log-in"></span> Valider</button>
+                <button type="submit" class="btn btn-default btn-primary" ng-click="oeuvreCtrl.validateOeuvre(oeuvreForm)"><span class="glyphicon glyphicon-log-in"></span> Valider</button>
                 &nbsp;
                 <button type="button" class="btn btn-default btn-primary" ng-click="oeuvreCtrl.cancel()"><span class="glyphicon glyphicon-remove"></span> Annuler</button>
             </div>

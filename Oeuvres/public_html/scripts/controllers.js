@@ -123,7 +123,7 @@ controllers.controller('OeuvreCtrl', ['OeuvresRest', '$routeParams','$location',
             oeuvreR.success(function (data, status) {
                 if (status === 200) {
                     oeuvreCtrl.oeuvre = data;
-                    oeuvreCtrl.selectedOptionPro = oeuvreCtrl.oeuvre.proprietaire;
+                    oeuvreCtrl.selectedOptionProprietaire = oeuvreCtrl.oeuvre.proprietaire;
                 }
             }).error(function (data) {
                 oeuvreCtrl.error = data;
@@ -136,22 +136,21 @@ controllers.controller('OeuvreCtrl', ['OeuvresRest', '$routeParams','$location',
         }
         /**
          * On a cliqué sur le bouton valider
-         * @param {type} id : id de l'employé modifié
          * @param {type} form : le formulaire complet
          */
-        function validateOeuvre(id, form) {
+        function validateOeuvre(form) {
             // Si tout a été saisi, pas de zone oubliée
             if (form.$valid) {             
                 // On récupère l'objet employee dans le scope de la vue
                 var oeuvre = oeuvreCtrl.oeuvre;
                 // La marque décimale doit être le point
-                oeuvre.titre = oeuvreCtrl.oeuvre.salary.replace(',','.');
+                oeuvre.titre = oeuvreCtrl.oeuvre.titre;
                 // Récupération du service sélectionné
-                oeuvre.prix = oeuvreCtrl.oeuvre.prix.replace(',','.');
+                oeuvre.prix = parseFloat(oeuvreCtrl.oeuvre.prix.replace(',','.'));
                 // Récupération du job sélectionné
-                oeuvre.proprietaire = oeuvreCtrl.selectedOptionPro;
+                oeuvre.id_proprietaire = oeuvreCtrl.selectedOptionProprietaire.id_proprietaire;
                 // si on a un id => c'est une modification
-                if (id) {
+                if (oeuvre.id_oeuvre) {
                     // Demande de mise à jour de l'employé
                     OeuvresRest.updateOeuvre(oeuvre).success(function (data, status) {
                         // Si c'est OK on consulte la nouvelle liste des employés
@@ -166,6 +165,7 @@ controllers.controller('OeuvreCtrl', ['OeuvresRest', '$routeParams','$location',
                 }
                 // Sinon c'est la création d'un nouvel employé
                 else {
+                    oeuvre.id_oeuvre = 0;
                     // Demande d'ajout de l'employé
                     OeuvresRest.ajouterOeuvre(oeuvre).success(function (data, status) {
                         // Si c'est OK on consulte la nouvelle liste des employés

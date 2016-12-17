@@ -43,7 +43,7 @@ services.factory('Config', [function () {
             urlSupprimerReservation: '/supprimerReservation/',
             
             urlGetAdherents: '/getAdherents',
-            urlGetConnecter: '/getConnecter/',
+            urlGetConnecter: '/getConnexion/',
             
             urlAjouterOeuvre: '/ajouterOeuvre',
             urlModifierOeuvre: '/modifierOeuvre',
