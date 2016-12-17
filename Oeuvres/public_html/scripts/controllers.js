@@ -95,3 +95,91 @@ controllers.controller('OeuvresCtrl', ['OeuvresRest', '$location', '$route', fun
         oeuvresCtrl.error = data; 
     });
 }]);
+
+controllers.controller('OeuvreCtrl', ['OeuvresRest', '$routeParams','$location', function (OeuvresRest, $routeParams, $location) {
+        // Définition du scope
+        var oeuvreCtrl = this;
+        // On référence les méthodes exposées
+        oeuvreCtrl.validateOeuvre = validateOeuvre;
+        oeuvreCtrl.cancel = cancel;
+	// On récupère l'id de l'employé
+        oeuvreCtrl.pageTitle = 'une oeuvre';
+        oeuvreCtrl.oeuvre_id = $routeParams.id;
+	// Si l'id est défini, c'est modification
+	// sinon ce sera un ajout
+        if (oeuvreCtrl.oeuvre_id)
+            oeuvreCtrl.pageTitle = 'Mise de à jour d\'' + oeuvreCtrl.pageTitle;
+        else
+            oeuvreCtrl.pageTitle = 'Ajout de d\'' + oeuvreCtrl.pageTitle;
+        // Récupère la liste des departments
+        OeuvresRest.getProprietaires().success(function (data) {
+            oeuvreCtrl.proprietaires = data;
+        });
+        // S'il s'agit d'une demande de modification, il faut lire l'employé,
+        // positionner les listes déroulantes (jobs et services) en fonction
+        // des valeurs de l'employé
+        if (oeuvreCtrl.oeuvre_id > 0) {
+            var oeuvreR = OeuvresRest.getOeuvre($routeParams.id);
+            oeuvreR.success(function (data, status) {
+                if (status === 200) {
+                    oeuvreCtrl.oeuvre = data;
+                    oeuvreCtrl.selectedOptionPro = oeuvreCtrl.oeuvre.proprietaire;
+                }
+            }).error(function (data) {
+                oeuvreCtrl.error = data;
+                alert(oeuvreCtrl.error);
+            });
+        }
+        // On a cliqué sur le bouton Annuler
+        function cancel() {
+            $location.path('/getOeuvres');
+        }
+        /**
+         * On a cliqué sur le bouton valider
+         * @param {type} id : id de l'employé modifié
+         * @param {type} form : le formulaire complet
+         */
+        function validateOeuvre(id, form) {
+            // Si tout a été saisi, pas de zone oubliée
+            if (form.$valid) {             
+                // On récupère l'objet employee dans le scope de la vue
+                var oeuvre = oeuvreCtrl.oeuvre;
+                // La marque décimale doit être le point
+                oeuvre.titre = oeuvreCtrl.oeuvre.salary.replace(',','.');
+                // Récupération du service sélectionné
+                oeuvre.prix = oeuvreCtrl.oeuvre.prix.replace(',','.');
+                // Récupération du job sélectionné
+                oeuvre.proprietaire = oeuvreCtrl.selectedOptionPro;
+                // si on a un id => c'est une modification
+                if (id) {
+                    // Demande de mise à jour de l'employé
+                    OeuvresRest.updateOeuvre(oeuvre).success(function (data, status) {
+                        // Si c'est OK on consulte la nouvelle liste des employés
+                        // Sinon on affiche l'erreur
+                        if (status === 200) {
+                            $location.path('/getOeuvres');
+                        }
+                    }).error(function (data) {
+                        oeuvreCtrl.error = data;
+                        alert(oeuvreCtrl.error);
+                    });
+                }
+                // Sinon c'est la création d'un nouvel employé
+                else {
+                    // Demande d'ajout de l'employé
+                    OeuvresRest.ajouterOeuvre(oeuvre).success(function (data, status) {
+                        // Si c'est OK on consulte la nouvelle liste des employés
+                        // Sinon on affiche l'erreur
+                        if (status === 200) {
+                            $location.path('/getOeuvres');
+                        }
+                    }).error(function (data) {
+                        oeuvreCtrl.error = data;
+                        alert(oeuvreCtrl.error);
+                    });
+                }
+        } else { // On affiche un message d'erreur type
+            oeuvreCtrl.error = 'Erreur!';
+        }
+    }
+ }]);

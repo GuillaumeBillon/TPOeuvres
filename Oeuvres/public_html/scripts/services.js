@@ -47,8 +47,6 @@ services.factory('Config', [function () {
             
             urlAjouterOeuvre: '/ajouterOeuvre',
             urlModifierOeuvre: '/modifierOeuvre',
-            urlAddEmployee: '/addEmployee',
-            urlDeleteEmployee: '/deleteEmployee/'
         };
 }]);
 
@@ -64,7 +62,10 @@ function ($http, Config) {
     var oeuvresRest = {
         getConnecter: getConnecter,
         getOeuvres : getOeuvres,
-        getReservations: getReservations
+        getReservations: getReservations,
+        ajouterOeuvre : ajouterOeuvre,
+        getProprietaires : getProprietaires,
+        getOeuvre : getOeuvre
     };
     return oeuvresRest;
     
@@ -74,7 +75,16 @@ function ($http, Config) {
     function getReservations() {
         return $http.get(Config.urlServer + Config.urlGetReservations);
     }
-	function getOeuvres() {
+    function getOeuvres() {
         return $http.get(Config.urlServer + Config.urlGetOeuvres);
+    }
+    function ajouterOeuvre(oeuvre) {
+        return $http.post(Config.urlServer + Config.urlAjouterOeuvre, oeuvre);
+    }
+    function getProprietaires() {
+        return $http.get(Config.urlServer + Config.urlGetProprietaires);
+    }
+    function getOeuvre(id){
+        return $http.get(Config.urlServer + Config.urlGetOeuvre + id);
     }
 }]);
