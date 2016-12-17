@@ -65,7 +65,8 @@ function ($http, Config) {
         getReservations: getReservations,
         ajouterOeuvre : ajouterOeuvre,
         getProprietaires : getProprietaires,
-        getOeuvre : getOeuvre
+        getOeuvre : getOeuvre,
+        modifierOeuvre: modifierOeuvre
     };
     return oeuvresRest;
     
@@ -86,5 +87,9 @@ function ($http, Config) {
     }
     function getOeuvre(id){
         return $http.get(Config.urlServer + Config.urlGetOeuvre + id);
+    }
+    function modifierOeuvre(oeuvre) {
+        var url = Config.urlServer + Config.urlModifierOeuvre;
+        return $http.post(url, oeuvre);
     }
 }]);

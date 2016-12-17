@@ -19,9 +19,17 @@
                 <td>{{ oeuvre.proprietaire.prenom_proprietaire}}</td>
                 <td>{{ oeuvre.proprietaire.nom_proprietaire}}</td>
                 <td><a class="btn btn-primary" href="#/reserverOeuvre">Réserver</a></td>
-                <td><a class="btn btn-primary" href="#/modifier">Modifier</a></td> 
+                <td><a class="btn btn-primary" href="#/modifierOeuvre/{{oeuvre.id_oeuvre}}">Modifier</a></td> 
                 <td><a class="btn btn-primary" href="#/supprimerOeuvre">Supprimer</a></td>                     
             </tr>
         </tbody>
     </table>          
+</div>
+<div class="form-group" >
+    <div class="col-sm-6 col-sm-offset-3" ng-show="oeuvresCtrl.error" >
+        <div class="alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{oeuvresCtrl.error}}
+        </div>
+    </div>
 </div>

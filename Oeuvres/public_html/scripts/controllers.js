@@ -146,13 +146,13 @@ controllers.controller('OeuvreCtrl', ['OeuvresRest', '$routeParams','$location',
                 // La marque décimale doit être le point
                 oeuvre.titre = oeuvreCtrl.oeuvre.titre;
                 // Récupération du service sélectionné
-                oeuvre.prix = parseFloat(oeuvreCtrl.oeuvre.prix.replace(',','.'));
+                oeuvre.prix = parseFloat(oeuvreCtrl.oeuvre.prix);
                 // Récupération du job sélectionné
                 oeuvre.id_proprietaire = oeuvreCtrl.selectedOptionProprietaire.id_proprietaire;
                 // si on a un id => c'est une modification
                 if (oeuvre.id_oeuvre) {
                     // Demande de mise à jour de l'employé
-                    OeuvresRest.updateOeuvre(oeuvre).success(function (data, status) {
+                    OeuvresRest.modifierOeuvre(oeuvre).success(function (data, status) {
                         // Si c'est OK on consulte la nouvelle liste des employés
                         // Sinon on affiche l'erreur
                         if (status === 200) {

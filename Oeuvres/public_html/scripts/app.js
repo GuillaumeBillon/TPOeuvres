@@ -31,6 +31,10 @@ app.config(['$routeProvider',
                     templateUrl: 'partials/oeuvre.html',
                     controller: 'OeuvreCtrl as oeuvreCtrl'
                 })
+                .when('/modifierOeuvre/:id', {
+                    templateUrl: 'partials/oeuvre.html',
+                    controller: 'OeuvreCtrl as oeuvreCtrl'
+                })
                 .otherwise({
                     redirectTo: '/home'
                 });
