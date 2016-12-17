@@ -66,7 +66,8 @@ function ($http, Config) {
         ajouterOeuvre : ajouterOeuvre,
         getProprietaires : getProprietaires,
         getOeuvre : getOeuvre,
-        modifierOeuvre: modifierOeuvre
+        modifierOeuvre: modifierOeuvre,
+        supprimerOeuvre: supprimerOeuvre
     };
     return oeuvresRest;
     
@@ -91,5 +92,9 @@ function ($http, Config) {
     function modifierOeuvre(oeuvre) {
         var url = Config.urlServer + Config.urlModifierOeuvre;
         return $http.post(url, oeuvre);
+    }
+    function supprimerOeuvre(id) {
+        var url = Config.urlServer + Config.urlSupprimerOeuvre + id;
+        return $http.get(url);
     }
 }]);

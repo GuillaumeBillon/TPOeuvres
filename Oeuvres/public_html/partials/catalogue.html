@@ -20,7 +20,8 @@
                 <td>{{ oeuvre.proprietaire.nom_proprietaire}}</td>
                 <td><a class="btn btn-primary" href="#/reserverOeuvre">Réserver</a></td>
                 <td><a class="btn btn-primary" href="#/modifierOeuvre/{{oeuvre.id_oeuvre}}">Modifier</a></td> 
-                <td><a class="btn btn-primary" href="#/supprimerOeuvre">Supprimer</a></td>                     
+                <td><a class="btn btn-primary" ng-click="oeuvresCtrl.supprimerOeuvre(oeuvre.id_oeuvre)">Supprimer</a>   
+                </td>
             </tr>
         </tbody>
     </table>          

@@ -86,6 +86,7 @@ controllers.controller('ConnectionCtrl', ['$rootScope', 'OeuvresRest',
 */
 controllers.controller('OeuvresCtrl', ['OeuvresRest', '$location', '$route', function(OeuvresRest, $location, $route) {
     var oeuvresCtrl = this;
+    oeuvresCtrl.supprimerOeuvre = supprimerOeuvre;
     // Récupération de la promesse
     var oeuvresPromise = OeuvresRest.getOeuvres();
     oeuvresPromise.success(function (data) {
@@ -94,6 +95,25 @@ controllers.controller('OeuvresCtrl', ['OeuvresRest', '$location', '$route', fun
     }).error(function (data) {
         oeuvresCtrl.error = data; 
     });
+    
+    /**
+    * Supprimer une oeuvre
+    * @param {type} id identifiant de l'oeuvre
+    */
+    function supprimerOeuvre(id) {
+        // Id renseigné ?
+        if (id) {
+            OeuvresRest.supprimerOeuvre(id).success(function(data, status) {
+                if (status === 200) {
+                    $location.path('/getOeuvres');
+                    $route.reload();
+                }
+            }).error(function(data) {
+                oeuvresCtrl.error = data;
+                alert(oeuvresCtrl.error);
+            });
+        }
+    }
 }]);
 
 controllers.controller('OeuvreCtrl', ['OeuvresRest', '$routeParams','$location', function (OeuvresRest, $routeParams, $location) {
@@ -130,6 +150,7 @@ controllers.controller('OeuvreCtrl', ['OeuvresRest', '$routeParams','$location',
                 alert(oeuvreCtrl.error);
             });
         }
+        
         // On a cliqué sur le bouton Annuler
         function cancel() {
             $location.path('/getOeuvres');
